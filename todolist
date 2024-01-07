@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>To-Do-Liste</title>
+</head>
+<body>
+    <h1>To-Do-Liste</h1>
+    <div>
+        <input type="text" id="taskInput" placeholder="Neue Aufgabe eingeben">
+        <button onclick="addTask()">Hinzufügen</button>
+    </div>
+    <ul id="taskList"></ul>
+
+    <script src="script.js"></script>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+div {
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+li.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+// Funktion zum Hinzufügen einer Aufgabe zur Liste
+function addTask() {
+    // Text aus dem Eingabefeld erhalten
+    var taskText = document.getElementById("taskInput").value;
+
+    // Sicherstellen, dass kein leerer Text hinzugefügt wird
+    if (taskText.trim() !== "") {
+        // Neues <li> Element erstellen
+        var newTask = document.createElement("li");
+
+        // Textinhalt setzen
+        newTask.textContent = taskText;
+
+        // Klickereignis hinzufügen, um die Aufgabe zu markieren/entmarkieren
+        newTask.onclick = function () {
+            this.classList.toggle("completed");
+        };
+
+        // Liste (ul) finden und das neue Element hinzufügen
+        document.getElementById("taskList").appendChild(newTask);
+
+        // Eingabefeld leeren
+        document.getElementById("taskInput").value = "";
+    }
+}
